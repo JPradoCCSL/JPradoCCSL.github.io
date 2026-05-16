@@ -170,3 +170,28 @@ document.getElementById("saveBtn").onclick = async () => {
   coop2El.value = 0;
 
 };
+document.getElementById("resetBtn").onclick = async () => {
+
+  const confirmReset = confirm(
+    "¿Seguro que quieres reiniciar TODO el torneo?"
+  );
+
+  if(!confirmReset) return;
+
+  const resetData = {};
+
+  teams.forEach(team => {
+
+    resetData[team] = {
+      points: 0,
+      victories: 0,
+      cooperative: 0
+    };
+
+  });
+
+  await update(ref(db,"teams"), resetData);
+
+  alert("Torneo reiniciado");
+
+};
