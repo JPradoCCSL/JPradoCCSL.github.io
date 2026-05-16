@@ -145,26 +145,19 @@ h1 {
 
 /* RESPONSIVE */
 @media (max-width: 768px) {
-  body {
-    padding: 15px;
-  }
 
-  .scoreboard {
-    flex-direction: column;
-  }
-
-  h1 {
-    font-size: 2rem;
+  .score-controls {
+    gap: 10px;
   }
 
   .plus,
   .minus {
-    width: 110px;
-    height: 110px;
-    font-size: 3rem;
+    width: 130px;
+    height: 130px;
+    font-size: 3.5rem;
   }
 
-  .score-controls span {
-    font-size: 3.5rem;
+  .scoreboard {
+    gap: 20px;
   }
 }
