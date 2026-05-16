@@ -24,8 +24,31 @@ const teams = [
 const MATCH_TIME = 30 * 60;
 
 let timeLeft = MATCH_TIME;
+let timerInterval = null;
+let isRunning = false;
 
 const timer = document.getElementById("timer");
+const startBtn = document.getElementById("startBtn");
+const resetTimerBtn = document.getElementById("resetTimerBtn");
+
+function updateTimerDisplay() {
+  const minutes = Math.floor(timeLeft / 60);
+  const seconds = timeLeft % 60;
+
+  timer.textContent =
+    `${String(minutes).padStart(2, '0')}:${String(seconds).padStart(2, '0')}`;
+}
+
+function tick() {
+  if (timeLeft > 0) {
+    timeLeft--;
+    updateTimerDisplay();
+  } else {
+    clearInterval(timerInterval);
+    isRunning = false;
+    startBtn.textContent = "Iniciar partido";
+  }
+}
 
 const team1Select = document.getElementById("team1");
 const team2Select = document.getElementById("team2");
