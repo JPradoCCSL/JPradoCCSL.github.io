@@ -63,6 +63,18 @@ startBtn.onclick = () => {
   }
 
 };
+resetTimerBtn.onclick = () => {
+
+  clearInterval(timerInterval);
+
+  timeLeft = MATCH_TIME;
+  isRunning = false;
+
+  updateTimerDisplay();
+
+  startBtn.textContent = "Iniciar partido";
+};
+
 const team1Select = document.getElementById("team1");
 const team2Select = document.getElementById("team2");
 
@@ -231,3 +243,5 @@ document.getElementById("resetBtn").onclick = async () => {
   alert("Torneo reiniciado");
 
 };
+
+updateTimerDisplay();
