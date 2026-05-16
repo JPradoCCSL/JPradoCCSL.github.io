@@ -21,7 +21,7 @@ const teams = [
   "Codigo 7"
 ];
 
-const MATCH_TIME = 20 * 60;
+const MATCH_TIME = 30 * 60;
 
 let timeLeft = MATCH_TIME;
 
