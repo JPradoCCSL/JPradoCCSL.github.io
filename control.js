@@ -31,49 +31,25 @@ const timer = document.getElementById("timer");
 const startBtn = document.getElementById("startBtn");
 const resetTimerBtn = document.getElementById("resetTimerBtn");
 
-function updateTimerDisplay() {
+function renderTimer() {
   const minutes = Math.floor(timeLeft / 60);
   const seconds = timeLeft % 60;
 
   timer.textContent =
-    `${String(minutes).padStart(2, '0')}:${String(seconds).padStart(2, '0')}`;
+    `${String(minutes).padStart(2,'0')}:${String(seconds).padStart(2,'0')}`;
 }
 
 function tick() {
   if (timeLeft > 0) {
     timeLeft--;
-    updateTimerDisplay();
+    renderTimer();
   } else {
     clearInterval(timerInterval);
+    timerInterval = null;
     isRunning = false;
     startBtn.textContent = "Iniciar partido";
   }
 }
-
-startBtn.onclick = () => {
-
-  if (!isRunning) {
-    timerInterval = setInterval(tick, 1000);
-    isRunning = true;
-    startBtn.textContent = "Pausar partido";
-  } else {
-    clearInterval(timerInterval);
-    isRunning = false;
-    startBtn.textContent = "Continuar partido";
-  }
-
-};
-resetTimerBtn.onclick = () => {
-
-  clearInterval(timerInterval);
-
-  timeLeft = MATCH_TIME;
-  isRunning = false;
-
-  updateTimerDisplay();
-
-  startBtn.textContent = "Iniciar partido";
-};
 
 const team1Select = document.getElementById("team1");
 const team2Select = document.getElementById("team2");
