@@ -50,6 +50,19 @@ function tick() {
   }
 }
 
+startBtn.onclick = () => {
+
+  if (!isRunning) {
+    timerInterval = setInterval(tick, 1000);
+    isRunning = true;
+    startBtn.textContent = "Pausar partido";
+  } else {
+    clearInterval(timerInterval);
+    isRunning = false;
+    startBtn.textContent = "Continuar partido";
+  }
+
+};
 const team1Select = document.getElementById("team1");
 const team2Select = document.getElementById("team2");
 
