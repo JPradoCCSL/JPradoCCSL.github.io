@@ -144,15 +144,7 @@ h1 {
 }
 
 /* RESPONSIVE */
-@@media (max-width: 768px) {
-
-  body {
-    padding: 15px;
-  }
-
-  h1 {
-    font-size: 2rem;
-  }
+@media (max-width: 768px) {
 
   /* SOLO marcador */
   .scoreboard {
