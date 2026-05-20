@@ -7,17 +7,17 @@ import {
 } from "https://www.gstatic.com/firebasejs/10.12.2/firebase-database.js";
 
 const teams = [
-  "Los Payicos",
-  "Las Ranas",
-  "Los Conejos",
-  "Los Inigualables",
+  "Payicos",
+  "Ranas",
+  "Conejos",
+  "Inigualables",
   "Nosotr@s Juramos",
-  "Los Veteranos",
-  "Los Melocotoneros",
-  "Los Haramball",
+  "Veteranos",
+  "Melocotoneros",
+  "Haramball",
   "Sin Filtros",
-  "Los Koalas",
-  "Los Conguitos",
+  "Koalas",
+  "Conguitos",
   "Codigo 7"
 ];
 
