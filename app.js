@@ -70,6 +70,10 @@ row.innerHTML = `
   <td class="victories">${stats.victories}</td>
   <td class="coop">${stats.cooperative}</td>
 `;
+
+    const sorted = Object.entries(data).sort((a,b) => {
+    return b[1].points - a[1].points;
+
   });
 
   leaderboard.innerHTML = "";
