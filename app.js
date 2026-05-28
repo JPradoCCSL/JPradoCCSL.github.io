@@ -20,15 +20,6 @@ const teams = [
   "Los Conguitos",
   "Codigo 7"
 ];
-function quitarArticulo(nombre) {
-  const articulos = ["Los ", "Las ", "El ", "La "];
-  for (let art of articulos) {
-    if (nombre.startsWith(art)) {
-      return nombre.slice(art.length);
-    }
-  }
-  return nombre;
-}
 
 const leaderboard = document.getElementById("leaderboard");
 
@@ -62,20 +53,49 @@ function initializeTeams() {
 
 }
 
-function renderLeaderboard(data) {
-row.innerHTML = `
-  <td class="position">${index + 1}</td>
-  <td>${quitarArticulo(name)}</td>   <!-- aquí -->
-  <td class="points">${stats.points}</td>
-  <td class="victories">${stats.victories}</td>
-  <td class="coop">${stats.cooperative}</td>
-`;
+function quitarArticulo(nombre) {
+  const articulos = ["Los ", "Las ", "El ", "La "];
+  for (let art of articulos) {
+    if (nombre.startsWith(art)) {
+      return nombre.slice(art.length);
+    }
+  }
+  return nombre;
+}
 
-    const sorted = Object.entries(data).sort((a,b) => {
+function renderLeaderboard(data) {
+
+  const sorted = Object.entries(data).sort((a,b) => {
     return b[1].points - a[1].points;
+  });
+
+  leaderboard.innerHTML = "";
+
+  sorted.forEach((team,index) => {
+
+    const [name,stats] = team;
+
+    const row = document.createElement("tr");
+
+    row.classList.add("updated");
+
+    if(index === 0) row.classList.add("first");
+    if(index === 1) row.classList.add("second");
+    if(index === 2) row.classList.add("third");
+
+    row.innerHTML = `
+      <td class="position">${index + 1}</td>
+      <td>${quitarArticulo(name)}</td>
+      <td class="points">${stats.points}</td>
+      <td class="victories">${stats.victories}</td>
+      <td class="coop">${stats.cooperative}</td>
+    `;
+
+    leaderboard.appendChild(row);
 
   });
 
+}
   leaderboard.innerHTML = "";
 
   sorted.forEach((team,index) => {
