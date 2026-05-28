@@ -1,8 +1,5 @@
 @import url('https://fonts.googleapis.com/css2?family=Inter:wght@400;600;700;800&display=swap');
 
-/* =========================
-   RESET
-========================= */
 * {
   margin: 0;
   padding: 0;
@@ -17,9 +14,6 @@ body {
   padding: 40px;
 }
 
-/* =========================
-   TITULO
-========================= */
 h1 {
   text-align: center;
   margin-bottom: 30px;
@@ -28,9 +22,6 @@ h1 {
   letter-spacing: 1px;
 }
 
-/* =========================
-   CONTROL / MARCADOR
-========================= */
 .control-container {
   max-width: 1100px;
   margin: auto;
@@ -58,7 +49,6 @@ h1 {
   color: #cbd5e1;
 }
 
-/* SCORE CONTROLS */
 .score-controls {
   display: flex;
   align-items: center;
@@ -66,7 +56,6 @@ h1 {
   gap: 25px;
 }
 
-/* BOTONES */
 .plus,
 .minus {
   width: 140px;
@@ -107,9 +96,6 @@ h1 {
   color: #f8fafc;
 }
 
-/* =========================
-   COOPERATIVOS
-========================= */
 .cooperative-section {
   display: flex;
   justify-content: space-between;
@@ -124,7 +110,6 @@ h1 {
   border: none;
 }
 
-/* BOTONES */
 .save-btn,
 .reset-btn {
   width: 100%;
@@ -153,9 +138,44 @@ h1 {
   transform: translateY(-2px);
 }
 
-/* =========================
-   LEADERBOARD (DECO PRO)
-========================= */
+/* TIMER */
+.timer {
+  text-align: center;
+  font-size: 4rem;
+  font-weight: 800;
+  margin: 30px 0;
+  color: #fbbf24;
+  text-shadow: 0 0 20px rgba(251, 191, 36, 0.3);
+}
+
+.selectors {
+  display: flex;
+  gap: 20px;
+  margin-bottom: 20px;
+}
+
+.select-box {
+  flex: 1;
+}
+
+.select-box label {
+  display: block;
+  margin-bottom: 8px;
+  color: #94a3b8;
+  font-weight: 600;
+}
+
+.select-box select {
+  width: 100%;
+  padding: 12px;
+  border-radius: 12px;
+  border: 1px solid rgba(255,255,255,0.1);
+  background: #1e293b;
+  color: white;
+  font-size: 1rem;
+}
+
+/* LEADERBOARD */
 .table-container {
   max-width: 1200px;
   margin: 60px auto 0;
@@ -199,36 +219,48 @@ tr:hover {
 .second { background: rgba(192, 192, 192, 0.08); }
 .third { background: rgba(205, 127, 50, 0.08); }
 
-/* =========================
-   MOBILE
-========================= */
-@media (max-width: 768px) {
+/* NUEVA COLUMNA PARTICIPACIÓN */
+.participation {
+  color: #a78bfa;
+  font-weight: 700;
+}
 
+/* MOBILE */
+@media (max-width: 768px) {
   body {
     padding: 15px;
   }
-
+  
   h1 {
     font-size: 2rem;
   }
-
+  
   .scoreboard {
     flex-direction: column;
     gap: 20px;
   }
-
+  
   .team-box {
     padding: 20px;
   }
-
+  
   .plus,
   .minus {
     width: 95px;
     height: 95px;
     font-size: 2.6rem;
   }
-
+  
   .score-controls span {
     font-size: 3rem;
+  }
+  
+  .timer {
+    font-size: 2.5rem;
+  }
+  
+  th, td {
+    padding: 12px 10px;
+    font-size: 0.9rem;
   }
 }
