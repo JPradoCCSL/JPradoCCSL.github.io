@@ -23,7 +23,6 @@ const teams = [
 const leaderboard = document.getElementById("leaderboard");
 const teamsRef = ref(db, "teams");
 
-// Función para quitar artículos de los nombres
 function quitarArticulo(nombre) {
   const articulos = ["Los ", "Las ", "El ", "La "];
   for (let art of articulos) {
@@ -40,7 +39,7 @@ function initializeTeams() {
       const initialData = {};
       
       teams.forEach(team => {
-        // +3 puntos para Los Payicos al inicio
+        // +3 puntos para Los Koalas al inicio
         const puntosIniciales = team === "Los Koalas" ? 3 : 0;
         
         initialData[team] = {
@@ -84,7 +83,6 @@ function renderLeaderboard(data) {
   });
 }
 
-// Escuchar cambios en tiempo real
 onValue(teamsRef, (snapshot) => {
   const data = snapshot.val();
   if (data) {
