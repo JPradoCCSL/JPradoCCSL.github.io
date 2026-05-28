@@ -39,13 +39,13 @@ function initializeTeams() {
       const initialData = {};
       
       teams.forEach(team => {
-        // +3 puntos para Los Koalas al inicio
         const puntosIniciales = team === "Los Koalas" ? 3 : 0;
         
         initialData[team] = {
           points: puntosIniciales,
           victories: 0,
-          cooperative: 0
+          cooperative: 0,
+          participation: 0
         };
       });
 
@@ -77,6 +77,7 @@ function renderLeaderboard(data) {
       <td class="points">${stats.points}</td>
       <td class="victories">${stats.victories}</td>
       <td class="coop">${stats.cooperative}</td>
+      <td class="participation">${stats.participation || 0}</td>
     `;
 
     leaderboard.appendChild(row);
