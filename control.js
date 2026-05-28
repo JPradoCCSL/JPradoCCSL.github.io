@@ -20,7 +20,7 @@ const teams = [
   "Codigo 7"
 ];
 
-const MATCH_TIME = 15 * 60; // 15 minutos en segundos
+const MATCH_TIME = 15 * 60;
 
 let timeLeft = MATCH_TIME;
 let timerInterval = null;
@@ -49,16 +49,13 @@ function tick() {
   }
 }
 
-// Botón iniciar/pausar
 startBtn.addEventListener("click", () => {
   if (isRunning) {
-    // Pausar
     clearInterval(timerInterval);
     timerInterval = null;
     isRunning = false;
     startBtn.textContent = "Reanudar partido";
   } else {
-    // Iniciar
     if (timeLeft === 0) timeLeft = MATCH_TIME;
     timerInterval = setInterval(tick, 1000);
     isRunning = true;
@@ -66,7 +63,6 @@ startBtn.addEventListener("click", () => {
   }
 });
 
-// Botón reiniciar timer
 resetTimerBtn.addEventListener("click", () => {
   clearInterval(timerInterval);
   timerInterval = null;
@@ -76,7 +72,6 @@ resetTimerBtn.addEventListener("click", () => {
   startBtn.textContent = "Iniciar partido";
 });
 
-// Selectores de equipos
 const team1Select = document.getElementById("team1");
 const team2Select = document.getElementById("team2");
 const team1Name = document.getElementById("team1Name");
@@ -90,7 +85,6 @@ const coop2El = document.getElementById("coop2");
 let score1 = 0;
 let score2 = 0;
 
-// Rellenar selectores
 teams.forEach(team => {
   const option1 = document.createElement("option");
   option1.value = team;
@@ -115,7 +109,6 @@ updateNames();
 team1Select.addEventListener("change", updateNames);
 team2Select.addEventListener("change", updateNames);
 
-// Controles de puntuación
 document.getElementById("plus1").onclick = () => {
   score1++;
   score1El.textContent = score1;
@@ -140,7 +133,6 @@ document.getElementById("minus2").onclick = () => {
   }
 };
 
-// Guardar resultado
 document.getElementById("saveBtn").onclick = async () => {
   const team1 = team1Select.value;
   const team2 = team2Select.value;
@@ -183,7 +175,6 @@ document.getElementById("saveBtn").onclick = async () => {
 
   alert("Resultat desat");
 
-  // Resetear marcador
   score1 = 0;
   score2 = 0;
   score1El.textContent = 0;
@@ -192,14 +183,14 @@ document.getElementById("saveBtn").onclick = async () => {
   coop2El.value = 0;
 };
 
-// Reiniciar torneo
 document.getElementById("resetBtn").onclick = async () => {
   const confirmReset = confirm("¿Seguro que quieres reiniciar TODO el torneo?");
   if (!confirmReset) return;
 
   const resetData = {};
   teams.forEach(team => {
-    const puntosIniciales = team === "Los Payicos" ? 3 : 0;
+    // +3 puntos para Los Koalas al reiniciar
+    const puntosIniciales = team === "Los Koalas" ? 3 : 0;
     resetData[team] = {
       points: puntosIniciales,
       victories: 0,
@@ -211,5 +202,4 @@ document.getElementById("resetBtn").onclick = async () => {
   alert("Torneo reiniciado");
 };
 
-// Inicializar timer
 renderTimer();
