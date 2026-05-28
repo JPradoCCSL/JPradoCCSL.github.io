@@ -220,4 +220,4 @@ document.getElementById("resetBtn").onclick = async () => {
 
 };
 
-updateTimerDisplay();
+renderTimer();
