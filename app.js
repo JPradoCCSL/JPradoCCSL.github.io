@@ -1,5 +1,4 @@
 import { db } from './firebase-config.js';
-
 import {
   ref,
   onValue,
@@ -22,37 +21,9 @@ const teams = [
 ];
 
 const leaderboard = document.getElementById("leaderboard");
-
 const teamsRef = ref(db, "teams");
 
-function initializeTeams() {
-
-  onValue(teamsRef, (snapshot) => {
-
-    if (!snapshot.exists()) {
-
-      const initialData = {};
-
-      teams.forEach(team => {
-
-        initialData[team] = {
-          points: 0,
-          victories: 0,
-          cooperative: 0
-        };
-
-      });
-
-      set(teamsRef, initialData);
-
-    }
-
-  }, {
-    onlyOnce: true
-  });
-
-}
-
+// Función para quitar artículos de los nombres
 function quitarArticulo(nombre) {
   const articulos = ["Los ", "Las ", "El ", "La "];
   for (let art of articulos) {
@@ -63,25 +34,43 @@ function quitarArticulo(nombre) {
   return nombre;
 }
 
-function renderLeaderboard(data) {
+function initializeTeams() {
+  onValue(teamsRef, (snapshot) => {
+    if (!snapshot.exists()) {
+      const initialData = {};
+      
+      teams.forEach(team => {
+        // +3 puntos para Los Payicos al inicio
+        const puntosIniciales = team === "Los Koalas" ? 3 : 0;
+        
+        initialData[team] = {
+          points: puntosIniciales,
+          victories: 0,
+          cooperative: 0
+        };
+      });
 
-  const sorted = Object.entries(data).sort((a,b) => {
+      set(teamsRef, initialData);
+    }
+  }, { onlyOnce: true });
+}
+
+function renderLeaderboard(data) {
+  const sorted = Object.entries(data).sort((a, b) => {
     return b[1].points - a[1].points;
   });
 
   leaderboard.innerHTML = "";
 
-  sorted.forEach((team,index) => {
-
-    const [name,stats] = team;
+  sorted.forEach((team, index) => {
+    const [name, stats] = team;
 
     const row = document.createElement("tr");
-
     row.classList.add("updated");
 
-    if(index === 0) row.classList.add("first");
-    if(index === 1) row.classList.add("second");
-    if(index === 2) row.classList.add("third");
+    if (index === 0) row.classList.add("first");
+    if (index === 1) row.classList.add("second");
+    if (index === 2) row.classList.add("third");
 
     row.innerHTML = `
       <td class="position">${index + 1}</td>
@@ -92,45 +81,15 @@ function renderLeaderboard(data) {
     `;
 
     leaderboard.appendChild(row);
-
   });
-
-  leaderboard.innerHTML = "";
-
-  sorted.forEach((team,index) => {
-
-    const [name,stats] = team;
-
-    const row = document.createElement("tr");
-
-    row.classList.add("updated");
-
-    if(index === 0) row.classList.add("first");
-    if(index === 1) row.classList.add("second");
-    if(index === 2) row.classList.add("third");
-
-    row.innerHTML = `
-      <td class="position">${index + 1}</td>
-      <td>${name}</td>
-      <td class="points">${stats.points}</td>
-      <td class="victories">${stats.victories}</td>
-      <td class="coop">${stats.cooperative}</td>
-    `;
-
-    leaderboard.appendChild(row);
-
-  });
-
 }
 
+// Escuchar cambios en tiempo real
 onValue(teamsRef, (snapshot) => {
-
   const data = snapshot.val();
-
-  if(data){
+  if (data) {
     renderLeaderboard(data);
   }
-
 });
 
 initializeTeams();
