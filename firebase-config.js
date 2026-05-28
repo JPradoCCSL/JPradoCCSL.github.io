@@ -1,8 +1,5 @@
 import { initializeApp } from "https://www.gstatic.com/firebasejs/10.12.2/firebase-app.js";
-
-import {
-  getDatabase
-} from "https://www.gstatic.com/firebasejs/10.12.2/firebase-database.js";
+import { getDatabase } from "https://www.gstatic.com/firebasejs/10.12.2/firebase-database.js";
 
 const firebaseConfig = {
   apiKey: "AIzaSyBNN9RSVO01p7Xz9xzaBghSoNV-H3wQruI",
@@ -14,6 +11,6 @@ const firebaseConfig = {
   appId: "1:689398385446:web:be472bcebba66a6d67cfe7",
   measurementId: "G-WBNBFMTW1M"
 };
-const app = initializeApp(firebaseConfig);
 
+const app = initializeApp(firebaseConfig);
 export const db = getDatabase(app);
