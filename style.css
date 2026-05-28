@@ -219,11 +219,19 @@ tr:hover {
 .second { background: rgba(192, 192, 192, 0.08); }
 .third { background: rgba(205, 127, 50, 0.08); }
 
-/* NUEVA COLUMNA PARTICIPACIÓN */
+/* ESTADÍSTICAS - MISMO ESTILO PARA TODAS */
+.points,
+.victories,
+.coop,
 .participation {
-  color: #a78bfa;
   font-weight: 700;
+  text-align: center;
 }
+
+.points { color: #fbbf24; }
+.victories { color: #22c55e; }
+.coop { color: #3b82f6; }
+.participation { color: #a78bfa; }
 
 /* MOBILE */
 @media (max-width: 768px) {
