@@ -95,7 +95,6 @@ function renderLeaderboard(data) {
 
   });
 
-}
   leaderboard.innerHTML = "";
 
   sorted.forEach((team,index) => {
