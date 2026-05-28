@@ -164,12 +164,19 @@ document.getElementById("saveBtn").onclick = async () => {
   const coop1 = Number(coop1El.value) || 0;
   const coop2 = Number(coop2El.value) || 0;
 
-  data[team1].points += points1 + coop1;
-  data[team2].points += points2 + coop2;
+  // Sumar puntos de victoria/empate + cooperativos + PARTICIPACIÓN (+1)
+  data[team1].points += points1 + coop1 + 1;
+  data[team2].points += points2 + coop2 + 1;
+
   data[team1].victories += victories1;
   data[team2].victories += victories2;
+
   data[team1].cooperative += coop1;
   data[team2].cooperative += coop2;
+
+  // Sumar participación (+1 a cada equipo)
+  data[team1].participation = (data[team1].participation || 0) + 1;
+  data[team2].participation = (data[team2].participation || 0) + 1;
 
   await update(ref(db, "teams"), data);
 
@@ -189,12 +196,12 @@ document.getElementById("resetBtn").onclick = async () => {
 
   const resetData = {};
   teams.forEach(team => {
-    // +3 puntos para Los Koalas al reiniciar
     const puntosIniciales = team === "Los Koalas" ? 3 : 0;
     resetData[team] = {
       points: puntosIniciales,
       victories: 0,
-      cooperative: 0
+      cooperative: 0,
+      participation: 0
     };
   });
 
