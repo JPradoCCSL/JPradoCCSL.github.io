@@ -7,8 +7,8 @@ import {
 
 const teams = [
   "Los Payicos",
-  "Las Ranas",
-  "Los Conejos",
+  "Los Roars",
+  "Los Xocas",
   "Los Inigualables",
   "Nosotr@s Juramos",
   "Los Veteranos",
@@ -17,9 +17,7 @@ const teams = [
   "Sin Filtros",
   "Los Koalas",
   "Los Conguitos",
-  "Codigo 7",
-  "Los Xocas",
-  "Los Roars"
+  "Codigo 7"
 ];
 
 const MATCH_TIME = 15 * 60;
