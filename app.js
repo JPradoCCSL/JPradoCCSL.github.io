@@ -39,8 +39,8 @@ function initializeTeams() {
       const initialData = {};
       
       teams.forEach(team => {
-        const puntosIniciales = team === "Los Koalas" ? 3 : 0;
-        const puntosIniciales = team === "Los Haramball" ? 3 : 0;
+    const puntosIniciales = team === "Los Koalas" || team === "Los Haramball" ? 3 : 0;
+      
         
         initialData[team] = {
           points: puntosIniciales,
