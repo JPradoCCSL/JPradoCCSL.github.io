@@ -17,7 +17,9 @@ const teams = [
   "Sin Filtros",
   "Los Koalas",
   "Los Conguitos",
-  "Codigo 7"
+  "Codigo 7",
+  "Los Xocas",
+  "Los Roars"
 ];
 
 const leaderboard = document.getElementById("leaderboard");
@@ -39,7 +41,6 @@ function initializeTeams() {
       const initialData = {};
       
       teams.forEach(team => {
-        // +3 puntos para Los Koalas y Los Haramball al inicio
         const puntosIniciales = (team === "Los Koalas" || team === "Los Haramball") ? 3 : 0;
         
         initialData[team] = {
