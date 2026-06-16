@@ -196,7 +196,8 @@ document.getElementById("resetBtn").onclick = async () => {
 
   const resetData = {};
   teams.forEach(team => {
-    const puntosIniciales = team === "Los Koalas" ? 3 : 0;
+    // +3 puntos para Los Koalas y Los Haramball al reiniciar
+    const puntosIniciales = (team === "Los Koalas" || team === "Los Haramball") ? 3 : 0;
     resetData[team] = {
       points: puntosIniciales,
       victories: 0,
