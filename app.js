@@ -2,7 +2,8 @@ import { db } from './firebase-config.js';
 import {
   ref,
   onValue,
-  set
+  set,
+  get
 } from "https://www.gstatic.com/firebasejs/10.12.2/firebase-database.js";
 
 const teams = [
@@ -33,25 +34,33 @@ function quitarArticulo(nombre) {
   return nombre;
 }
 
-function initializeTeams() {
-  onValue(teamsRef, (snapshot) => {
-    if (!snapshot.exists()) {
-      const initialData = {};
-      
-      teams.forEach(team => {
-        const puntosIniciales = (team === "Los Koalas" || team === "Los Haramball") ? 3 : 0;
-        
-        initialData[team] = {
-          points: puntosIniciales,
-          victories: 0,
-          cooperative: 0,
-          participation: 0
-        };
-      });
-
-      set(teamsRef, initialData);
+async function syncTeams() {
+  const snapshot = await get(ref(db, "teams"));
+  const existingData = snapshot.val() || {};
+  
+  const newData = {};
+  
+  teams.forEach(team => {
+    const puntosIniciales = (team === "Los Koalas" || team === "Los Haramball") ? 3 : 0;
+    
+    if (existingData[team]) {
+      newData[team] = {
+        points: existingData[team].points || puntosIniciales,
+        victories: existingData[team].victories || 0,
+        cooperative: existingData[team].cooperative || 0,
+        participation: existingData[team].participation || 0
+      };
+    } else {
+      newData[team] = {
+        points: puntosIniciales,
+        victories: 0,
+        cooperative: 0,
+        participation: 0
+      };
     }
-  }, { onlyOnce: true });
+  });
+  
+  await set(teamsRef, newData);
 }
 
 function renderLeaderboard(data) {
@@ -84,11 +93,13 @@ function renderLeaderboard(data) {
   });
 }
 
-onValue(teamsRef, (snapshot) => {
-  const data = snapshot.val();
-  if (data) {
-    renderLeaderboard(data);
-  }
+syncTeams().then(() => {
+  onValue(teamsRef, (snapshot) => {
+    const data = snapshot.val();
+    if (data) {
+      renderLeaderboard(data);
+    }
+  });
+}).catch(err => {
+  console.error("Error syncTeams:", err);
 });
-
-initializeTeams();
