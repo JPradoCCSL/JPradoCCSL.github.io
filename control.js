@@ -17,7 +17,9 @@ const teams = [
   "Sin Filtros",
   "Los Koalas",
   "Los Conguitos",
-  "Codigo 7"
+  "Codigo 7",
+  "Los Xocas",
+  "Los Roars"
 ];
 
 const MATCH_TIME = 15 * 60;
@@ -164,7 +166,6 @@ document.getElementById("saveBtn").onclick = async () => {
   const coop1 = Number(coop1El.value) || 0;
   const coop2 = Number(coop2El.value) || 0;
 
-  // Sumar puntos de victoria/empate + cooperativos + PARTICIPACIÓN (+1)
   data[team1].points += points1 + coop1 + 1;
   data[team2].points += points2 + coop2 + 1;
 
@@ -174,7 +175,6 @@ document.getElementById("saveBtn").onclick = async () => {
   data[team1].cooperative += coop1;
   data[team2].cooperative += coop2;
 
-  // Sumar participación (+1 a cada equipo)
   data[team1].participation = (data[team1].participation || 0) + 1;
   data[team2].participation = (data[team2].participation || 0) + 1;
 
@@ -196,7 +196,6 @@ document.getElementById("resetBtn").onclick = async () => {
 
   const resetData = {};
   teams.forEach(team => {
-    // +3 puntos para Los Koalas y Los Haramball al reiniciar
     const puntosIniciales = (team === "Los Koalas" || team === "Los Haramball") ? 3 : 0;
     resetData[team] = {
       points: puntosIniciales,
